@@ -7,6 +7,10 @@ const urlDatabase = {
   "9sm5xK": "http://www.google.com",
 };
 
+app.get("/", (req, res) => {
+  res.send("hello!");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
