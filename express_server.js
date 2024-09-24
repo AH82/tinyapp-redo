@@ -65,8 +65,9 @@ app.get("/urls", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
-  console.log(req.body);
+  console.log("req.body : \n", req.body);
   res.send("OK Tamam ya Basha");
+  urlDatabase[`${generateRandomString()}`] = req.body.longURL;
 });
 
 app.get("/urls/new", (req, res) => {
