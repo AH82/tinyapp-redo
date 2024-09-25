@@ -66,8 +66,12 @@ app.get("/urls", (req, res) => {
 
 app.post("/urls", (req, res) => {
   console.log("req.body : \n", req.body);
-  res.send("OK Tamam ya Basha");
-  urlDatabase[`${generateRandomString()}`] = req.body.longURL;
+
+  const generated_URL_ID = generateRandomString();
+  urlDatabase[`${generated_URL_ID}`] = req.body.longURL;
+
+  // res.send("OK Tamam ya Basha");
+  res.redirect(`/urls/${generated_URL_ID}`)
 });
 
 app.get("/urls/new", (req, res) => {
