@@ -71,7 +71,7 @@ app.post("/urls", (req, res) => {
   urlDatabase[`${generated_URL_ID}`] = req.body.longURL;
 
   // res.send("OK Tamam ya Basha");
-  res.redirect(`/urls/${generated_URL_ID}`)
+  res.redirect(`/urls/${generated_URL_ID}`);
 });
 
 app.get("/urls/new", (req, res) => {
