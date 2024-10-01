@@ -88,6 +88,12 @@ app.get("/u/:id", (req, res) => {
   res.redirect(longURL);
 });
 
+// EDIT ROUTE
+app.post("/urls/:id/edit", (req, res) => {
+  urlDatabase[req.params.id] = req.body.edit_LongURL;
+  res.redirect("/urls");
+});
+
 // DELETE ROUTE
 app.post("/urls/:id/delete", (req, res) => {
   delete urlDatabase[req.params.id];
