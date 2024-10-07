@@ -25,7 +25,13 @@
       style="margin: 1em"
       > Logged in as : <%= username %>  
       </div>
-      <button class="btn btn-primary ">Logout</button>
+      <form
+        class="form"
+        action="/logout"
+        method="POST"
+      >
+        <button class="btn btn-primary ">Logout</button>
+      </form>
 
       <% } else { %>
         <form
