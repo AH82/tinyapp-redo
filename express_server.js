@@ -125,11 +125,24 @@ app.post("/urls/:id/delete", (req, res) => {
   res.redirect("/urls");
 });
 
+// USER REGISTRATION
 app.get("/register", (req, res) => {
   const templateVars = {
     username : req.cookies["username"],
   };
   res.render("register", templateVars);
+});
+
+app.post("/register", (req, res) => {
+  const generatedUserID = generateRandomString();
+  users[`${generatedUserID}`] = {
+    id : generatedUserID,
+    email: req.body.email,
+    password: req.body.password
+  };
+  console.log('user Object =\n', users); //clg temp
+  res.cookie("user_id", generatedUserID);
+  res.redirect("/urls");
 });
 
 // LOGIN
