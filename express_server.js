@@ -57,6 +57,32 @@ const users = {
   },
 };
 
+/**
+ * Get a user by their email, from the users object.
+ * @param {string} email - string
+ *
+ * @param {object} [usersObject=users] - Users-list Object to be searched through. Defaults to users oject in this code.
+    * @param {object} usersObject.userID - indiviual user object with their id as the property-key
+      * @param {string} usersObject.userID.id - user's ID
+      * @param {string} usersObject.userID.email - user's email
+      * @param {string} usersObject.userID.password - users's password
+ *
+ * @returns {null|object[userID]}
+ *  - returns null if not found, or,
+ *  - returns individual user object if found.
+ */
+const getUserByEmail = (email, usersObject = users) => {
+  for (let user in usersObject) {
+    if (usersObject[user]["email"] === email) return user;
+  }
+  return null;
+};
+
+// MINI_TEST : for getUserByEmail() fn
+// console.log("TESTING ... getUserByEmail(...)\n");
+// console.log("getUserByEmail -> user2 = ", getUserByEmail("user2@example.com"));
+// console.log("getUserByEmail -> non-existing user = ", getUserByEmail("user3@example.com"));
+
 const urlDatabase = {
   b2xVn2: "http://www.lighthouselabs.ca",
   "9sm5xK": "http://www.google.com",
