@@ -164,15 +164,24 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-  const generatedUserID = generateRandomString();
-  users[`${generatedUserID}`] = {
-    id : generatedUserID,
-    email: req.body.email,
-    password: req.body.password
-  };
-  console.log('POST registration user Object =\n', users); //clg temp
-  res.cookie("user_id", generatedUserID);
-  res.redirect("/urls");
+  if (!req.body.email || !req.body.password) {
+    /* Validation check => user email or password cannot be empty */
+    res.status(400).send('Bad Request: Status 400 : email or pass are empty');
+  } else if (getUserByEmail(req.body.email)) {
+    /* Validation check => user email canot be already register*/
+    res.status(400).send('Bad Request: Status 400 : user email already exists');
+  } else {
+    /* route logic */
+    const generatedUserID = generateRandomString();
+    users[`${generatedUserID}`] = {
+      id : generatedUserID,
+      email: req.body.email,
+      password: req.body.password
+    };
+    console.log('POST registration user Object =\n', users); //clg temp
+    res.cookie("user_id", generatedUserID);
+    res.redirect("/urls");
+  }
 });
 
 // LOGIN
