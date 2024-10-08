@@ -76,7 +76,8 @@ app.get("/hello", (req, res) => {
 
 app.get("/urls", (req, res) => {
   const templateVars = {
-    username : req.cookies["username"],
+    userID : req.cookies["user_id"],
+    users,
     urls : urlDatabase
   };
   res.render("urls_index", templateVars);
@@ -94,14 +95,16 @@ app.post("/urls", (req, res) => {
 
 app.get("/urls/new", (req, res) => {
   const templateVars = {
-    username : req.cookies["username"]
+    // userID : req.cookies["user_id"]
+    users
   };
   res.render("urls_new", templateVars);
 });
 
 app.get("/urls/:id", (req, res) => {
   const templateVars = {
-    username : req.cookies["username"],
+    // userID : req.cookies["user_id"],
+    users,
     id: req.params.id,
     longURL : urlDatabase[req.params.id]
   };
@@ -128,7 +131,8 @@ app.post("/urls/:id/delete", (req, res) => {
 // USER REGISTRATION
 app.get("/register", (req, res) => {
   const templateVars = {
-    username : req.cookies["username"],
+    userID : req.cookies["user_id"],
+    users
   };
   res.render("register", templateVars);
 });
@@ -140,7 +144,7 @@ app.post("/register", (req, res) => {
     email: req.body.email,
     password: req.body.password
   };
-  console.log('user Object =\n', users); //clg temp
+  console.log('POST registration user Object =\n', users); //clg temp
   res.cookie("user_id", generatedUserID);
   res.redirect("/urls");
 });

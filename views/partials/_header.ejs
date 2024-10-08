@@ -19,11 +19,11 @@
       </div>
     </div>
 
-    <% if (username) { %> 
+    <% if (users[userID]) { %> 
       <div 
       class=""
       style="margin: 1em"
-      > Logged in as : <%= username %>  
+      > Logged in as :  <%= users[userID].email %> 
       </div>
       <form
         class="form"
