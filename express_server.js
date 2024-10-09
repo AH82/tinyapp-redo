@@ -73,7 +73,7 @@ const users = {
  */
 const getUserByEmail = (email, usersObject = users) => {
   for (let user in usersObject) {
-    if (usersObject[user]["email"] === email) return user;
+    if (usersObject[user]["email"] === email) return usersObject[user];
   }
   return null;
 };
