@@ -121,7 +121,7 @@ app.post("/urls", (req, res) => {
 
 app.get("/urls/new", (req, res) => {
   const templateVars = {
-    // userID : req.cookies["user_id"]
+    userID : req.cookies["user_id"],
     users
   };
   res.render("urls_new", templateVars);
@@ -129,7 +129,7 @@ app.get("/urls/new", (req, res) => {
 
 app.get("/urls/:id", (req, res) => {
   const templateVars = {
-    // userID : req.cookies["user_id"],
+    userID : req.cookies["user_id"],
     users,
     id: req.params.id,
     longURL : urlDatabase[req.params.id]
