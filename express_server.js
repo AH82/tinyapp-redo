@@ -194,8 +194,20 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-  res.cookie("username", req.body.username);
-  res.redirect("/urls");
+  const existingUser = getUserByEmail(req.body.email);
+  if (!req.body.email || !req.body.password) {
+    /* Validation check => user email or password cannot be empty */
+    res.status(400).send('Bad Request: Status 400 : email or pass are empty');
+  } else if (!existingUser) {
+    /* Validation check => user email canot be already register*/
+    res.status(400).send('Bad Request: Status 400 : user email Not Found');
+  } else if (existingUser.password !== req.body.password) {
+    /* Validation check => correct password*/
+    res.status(403).send('Bad Request: Status 403 : Forbidden : incorrect password');
+  } else {
+    res.cookie("user_id", existingUser.id);
+    res.redirect("/urls");
+  }
 });
 
 // LOGOUT
