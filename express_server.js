@@ -111,13 +111,23 @@ app.get("/urls", (req, res) => {
 });
 
 app.post("/urls", (req, res) => {
-  console.log("req.body : \n", req.body);
 
-  const generatedIDForURL = generateRandomString();
-  urlDatabase[`${generatedIDForURL}`] = req.body.longURL;
+  if (!req.cookies["user_id"]) {
 
-  // res.send("OK Tamam ya Basha");
-  res.redirect(`/urls/${generatedIDForURL}`);
+    res.status(403).send(`
+      Status 403: Forbidden 
+      you must Login or Register to create short URLs
+      \n`).end();
+
+    /* TEST IT in TERMINAL :
+     * curl -X POST -d "longURL=http://www.lighthouselabs.com" localhost:8080/urls
+     */
+
+  } else {
+    const generatedIDForURL = generateRandomString();
+    urlDatabase[`${generatedIDForURL}`] = req.body.longURL;
+    res.redirect(`/urls/${generatedIDForURL}`);
+  }
 });
 
 app.get("/urls/new", (req, res) => {
@@ -125,7 +135,8 @@ app.get("/urls/new", (req, res) => {
     userID : req.cookies["user_id"],
     users
   };
-  res.render("urls_new", templateVars);
+  // isUserLoggedIn?
+  templateVars.userID ? res.render("urls_new", templateVars) : res.redirect("/login");
 });
 
 app.get("/urls/:id", (req, res) => {
