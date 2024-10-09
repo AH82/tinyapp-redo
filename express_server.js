@@ -113,11 +113,11 @@ app.get("/urls", (req, res) => {
 app.post("/urls", (req, res) => {
   console.log("req.body : \n", req.body);
 
-  const generated_URL_ID = generateRandomString();
-  urlDatabase[`${generated_URL_ID}`] = req.body.longURL;
+  const generatedIDForURL = generateRandomString();
+  urlDatabase[`${generatedIDForURL}`] = req.body.longURL;
 
   // res.send("OK Tamam ya Basha");
-  res.redirect(`/urls/${generated_URL_ID}`);
+  res.redirect(`/urls/${generatedIDForURL}`);
 });
 
 app.get("/urls/new", (req, res) => {
