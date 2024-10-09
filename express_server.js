@@ -100,6 +100,7 @@ app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
 });
 
+// URLS ROUTES / ENDPOINTS
 app.get("/urls", (req, res) => {
   const templateVars = {
     userID : req.cookies["user_id"],
@@ -185,7 +186,7 @@ app.post("/register", (req, res) => {
   }
 });
 
-// LOGIN
+// USER LOGIN
 app.get("/login", (req, res) => {
   const templateVars = {
     userID : req.cookies["user_id"],
@@ -212,7 +213,7 @@ app.post("/login", (req, res) => {
   }
 });
 
-// LOGOUT
+// USER LOGOUT
 app.post("/logout", (req, res) => {
   res.clearCookie("user_id");
   res.redirect("/login");
