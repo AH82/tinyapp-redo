@@ -160,7 +160,8 @@ app.get("/register", (req, res) => {
     userID : req.cookies["user_id"],
     users
   };
-  res.render("register", templateVars);
+  // isUserLoggedIn?
+  templateVars.userID ? res.redirect("urls") : res.render("register", templateVars);
 });
 
 app.post("/register", (req, res) => {
@@ -190,7 +191,8 @@ app.get("/login", (req, res) => {
     userID : req.cookies["user_id"],
     users
   };
-  res.render("login", templateVars);
+  // isUserLoggedIn?
+  templateVars.userID ? res.redirect("urls") : res.render("login", templateVars);
 });
 
 app.post("/login", (req, res) => {
