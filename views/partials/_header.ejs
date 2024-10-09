@@ -34,29 +34,12 @@
       </form>
 
       <% } else { %>
-        <form
-        method="POST"
-        action="/login"
-        class="form-inline"
-        style="margin: 0 1em"
+        <div
+          class="navbar-nav"
         >
-          <button
-            type="submit"
-            class="btn btn-primary"
-            >Login</button>
-        </form>
-        <form
-        method="POST"
-        action="/register"
-        class="form-inline"
-        style="margin: 0 1em"
-        >
-          <button
-            type="submit"
-            class="btn btn-primary"
-            >Register</button>
-        </form>
-
+          <a class="nav-item nav-link" href="/login">Login</a>
+          <a class="nav-item nav-link" href="/register">Register</a>
+        </div>
       <% } %>
   </nav>
 </header>
