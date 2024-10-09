@@ -151,7 +151,9 @@ app.get("/urls/:id", (req, res) => {
 
 app.get("/u/:id", (req, res) => {
   const longURL = urlDatabase[req.params.id];
-  res.redirect(longURL);
+  longURL ? res.redirect(longURL) : res
+    .status(404)
+    .send("Status 404 : URL ID does not exist.");
 });
 
 // EDIT ROUTE
