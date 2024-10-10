@@ -145,7 +145,9 @@ app.post("/urls", (req, res) => {
 
   } else {
     const generatedIDForURL = generateRandomString();
-    urlDatabase[`${generatedIDForURL}`] = req.body.longURL;
+    urlDatabase[`${generatedIDForURL}`] = {};
+    urlDatabase[`${generatedIDForURL}`]["longURL"] = req.body.longURL;
+    urlDatabase[`${generatedIDForURL}`]["userID"] = req.cookies["user_id"];
     res.redirect(`/urls/${generatedIDForURL}`);
   }
 });
@@ -164,13 +166,13 @@ app.get("/urls/:id", (req, res) => {
     userID : req.cookies["user_id"],
     users,
     id: req.params.id,
-    longURL : urlDatabase[req.params.id]
+    longURL : urlDatabase[req.params.id]["longURL"]
   };
   res.render("urls_show", templateVars);
 });
 
 app.get("/u/:id", (req, res) => {
-  const longURL = urlDatabase[req.params.id];
+  const longURL = urlDatabase[req.params.id]["longURL"];
   longURL ? res.redirect(longURL) : res
     .status(404)
     .send("Status 404 : URL ID does not exist.");
@@ -178,7 +180,7 @@ app.get("/u/:id", (req, res) => {
 
 // EDIT ROUTE
 app.post("/urls/:id/edit", (req, res) => {
-  urlDatabase[req.params.id] = req.body.edit_LongURL;
+  urlDatabase[req.params.id]["longURL"] = req.body.edit_LongURL;
   res.redirect("/urls");
 });
 
