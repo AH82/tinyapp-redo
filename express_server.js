@@ -55,6 +55,11 @@ const users = {
     email: "user2@example.com",
     password: "dishwasher-funk",
   },
+  aJ48lW: {
+    id: "aJ48lW",
+    email: "user@email.com",
+    password: "pass",
+  },
 };
 
 /**
