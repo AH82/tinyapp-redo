@@ -133,12 +133,20 @@ app.get("/hello", (req, res) => {
 // URLS ROUTES / ENDPOINTS
 app.get("/urls", (req, res) => {
   const userID = req.cookies["user_id"];
-  const templateVars = {
-    userID,
-    users,
-    urls : urlsForUser(userID)
-  };
-  res.render("urls_index", templateVars);
+  if (!userID) {
+    res.status(403).send(`
+      Status 403: Forbidden 
+      you must Login or Register to view URLs
+      \n`).end();
+  } else {
+
+    const templateVars = {
+      userID,
+      users,
+      urls : urlsForUser(userID)
+    };
+    res.render("urls_index", templateVars);
+  }
 });
 
 app.post("/urls", (req, res) => {
