@@ -185,7 +185,12 @@ app.get("/urls/:id", (req, res) => {
   const userID = req.cookies["user_id"];
   const shortURLID = req.params.id;
 
-  if (userID !== urlDatabase[shortURLID]["userID"]) {
+  if (!userID) {
+    res.status(403).send(`
+      Status 403: Forbidden 
+      You must log in to access urls.
+      \n`).end();
+  } else if (userID !== urlDatabase[shortURLID]["userID"]) {
     res.status(403).send(`
       Status 403: Forbidden 
       You do not have access to this URL
