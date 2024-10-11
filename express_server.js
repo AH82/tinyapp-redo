@@ -190,11 +190,16 @@ app.get("/urls/:id", (req, res) => {
       Status 403: Forbidden 
       You must log in to access urls.
       \n`).end();
+  } else if (!urlDatabase[shortURLID]) {
+    res.status(404).send(`
+        Status 404 : URL does not exist.
+        \n`).end();
   } else if (userID !== urlDatabase[shortURLID]["userID"]) {
     res.status(403).send(`
       Status 403: Forbidden 
       You do not have access to this URL
       \n`).end();
+      
   } else {
 
     const templateVars = {
