@@ -221,14 +221,58 @@ app.get("/u/:id", (req, res) => {
 
 // EDIT ROUTE
 app.post("/urls/:id/edit", (req, res) => {
-  urlDatabase[req.params.id]["longURL"] = req.body.edit_LongURL;
-  res.redirect("/urls");
+  
+  const userID = req.cookies["user_id"];
+  const shortURLID = req.params.id;
+
+  if (!userID) {
+    res.status(403).send(`
+      Status 403: Forbidden 
+      You must log in to access urls.
+      \n`).end();
+  } else if (!urlDatabase[shortURLID]) {
+    res.status(404).send(`
+        Status 404 : URL does not exist.
+        \n`).end();
+  } else if (userID !== urlDatabase[shortURLID]["userID"]) {
+    res.status(403).send(`
+      Status 403: Forbidden 
+      You do not have access to this URL
+      \n`).end();
+      
+  } else {
+
+    urlDatabase[shortURLID]["longURL"] = req.body.edit_LongURL;
+    res.redirect("/urls");
+  }
 });
 
 // DELETE ROUTE
 app.post("/urls/:id/delete", (req, res) => {
-  delete urlDatabase[req.params.id];
-  res.redirect("/urls");
+
+  const userID = req.cookies["user_id"];
+  const shortURLID = req.params.id;
+
+  if (!userID) {
+    res.status(403).send(`
+      Status 403: Forbidden 
+      You must log in to access urls.
+      \n`).end();
+  } else if (!urlDatabase[shortURLID]) {
+    res.status(404).send(`
+        Status 404 : URL does not exist.
+        \n`).end();
+  } else if (userID !== urlDatabase[shortURLID]["userID"]) {
+    res.status(403).send(`
+      Status 403: Forbidden 
+      You do not have access to this URL
+      \n`).end();
+      
+  } else {
+
+    delete urlDatabase[shortURLID];
+    res.redirect("/urls");
+  }
 });
 
 // USER REGISTRATION
