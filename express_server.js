@@ -181,13 +181,25 @@ app.get("/urls/new", (req, res) => {
 });
 
 app.get("/urls/:id", (req, res) => {
-  const templateVars = {
-    userID : req.cookies["user_id"],
-    users,
-    id: req.params.id,
-    longURL : urlDatabase[req.params.id]["longURL"]
-  };
-  res.render("urls_show", templateVars);
+  
+  const userID = req.cookies["user_id"];
+  const shortURLID = req.params.id;
+
+  if (userID !== urlDatabase[shortURLID]["userID"]) {
+    res.status(403).send(`
+      Status 403: Forbidden 
+      You do not have access to this URL
+      \n`).end();
+  } else {
+
+    const templateVars = {
+      userID,
+      users,
+      id: shortURLID,
+      longURL : urlDatabase[shortURLID]["longURL"]
+    };
+    res.render("urls_show", templateVars);
+  }
 });
 
 app.get("/u/:id", (req, res) => {
