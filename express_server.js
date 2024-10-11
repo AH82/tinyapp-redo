@@ -132,10 +132,11 @@ app.get("/hello", (req, res) => {
 
 // URLS ROUTES / ENDPOINTS
 app.get("/urls", (req, res) => {
+  const userID = req.cookies["user_id"];
   const templateVars = {
-    userID : req.cookies["user_id"],
+    userID,
     users,
-    urls : urlDatabase
+    urls : urlsForUser(userID)
   };
   res.render("urls_index", templateVars);
 });
