@@ -108,6 +108,16 @@ const urlDatabase = {
 
 };
 
+const urlsForUser = function(id, databaseObject = urlDatabase) {
+  let urlDatabaseForUser = {};
+  for (let shortURLID in databaseObject) {
+    if (databaseObject[shortURLID].userID === id) {
+      urlDatabaseForUser[shortURLID] = databaseObject[shortURLID];
+    }
+  }
+  return urlDatabaseForUser;
+};
+
 app.get("/", (req, res) => {
   res.send("hello!");
 });
