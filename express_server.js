@@ -327,7 +327,7 @@ app.post("/login", (req, res) => {
   } else if (!existingUser) {
     /* Validation check => user email canot be already register*/
     res.status(400).send('Bad Request: Status 400 : user email Not Found');
-  } else if (existingUser.password !== req.body.password) {
+  } else if (!bcrypt.compareSync(req.body.password, existingUser.password)) {
     /* Validation check => correct password*/
     res.status(403).send('Bad Request: Status 403 : Forbidden : incorrect password');
   } else {
