@@ -1,5 +1,4 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 const bcrypt = require("bcryptjs");
 
@@ -8,13 +7,13 @@ const PORT = 8080;
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
 app.use(cookieSession({
   name: 'session',
-  keys: [/* secret keys */],
+  keys: ["shshSerr"],/* secret keys */
 
   // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  maxAge: 2 * 24 * 60 * 60 * 1000 // 48 hours
 }));
 
 /**
@@ -142,7 +141,7 @@ app.get("/hello", (req, res) => {
 
 // URLS ROUTES / ENDPOINTS
 app.get("/urls", (req, res) => {
-  const userID = req.cookies["user_id"];
+  const userID = req.session["user_id"];
   if (!userID) {
     res.status(403).send(`
       Status 403: Forbidden 
@@ -161,7 +160,7 @@ app.get("/urls", (req, res) => {
 
 app.post("/urls", (req, res) => {
 
-  if (!req.cookies["user_id"]) {
+  if (!req.session["user_id"]) {
 
     res.status(403).send(`
       Status 403: Forbidden 
@@ -176,14 +175,14 @@ app.post("/urls", (req, res) => {
     const generatedIDForURL = generateRandomString();
     urlDatabase[`${generatedIDForURL}`] = {};
     urlDatabase[`${generatedIDForURL}`]["longURL"] = req.body.longURL;
-    urlDatabase[`${generatedIDForURL}`]["userID"] = req.cookies["user_id"];
+    urlDatabase[`${generatedIDForURL}`]["userID"] = req.session["user_id"];
     res.redirect(`/urls/${generatedIDForURL}`);
   }
 });
 
 app.get("/urls/new", (req, res) => {
   const templateVars = {
-    userID : req.cookies["user_id"],
+    userID : req.session["user_id"],
     users
   };
   // isUserLoggedIn?
@@ -192,7 +191,7 @@ app.get("/urls/new", (req, res) => {
 
 app.get("/urls/:id", (req, res) => {
   
-  const userID = req.cookies["user_id"];
+  const userID = req.session["user_id"];
   const shortURLID = req.params.id;
 
   if (!userID) {
@@ -232,7 +231,7 @@ app.get("/u/:id", (req, res) => {
 // EDIT ROUTE
 app.post("/urls/:id/edit", (req, res) => {
   
-  const userID = req.cookies["user_id"];
+  const userID = req.session["user_id"];
   const shortURLID = req.params.id;
 
   if (!userID) {
@@ -260,7 +259,7 @@ app.post("/urls/:id/edit", (req, res) => {
 // DELETE ROUTE
 app.post("/urls/:id/delete", (req, res) => {
 
-  const userID = req.cookies["user_id"];
+  const userID = req.session["user_id"];
   const shortURLID = req.params.id;
 
   if (!userID) {
@@ -288,7 +287,7 @@ app.post("/urls/:id/delete", (req, res) => {
 // USER REGISTRATION
 app.get("/register", (req, res) => {
   const templateVars = {
-    userID : req.cookies["user_id"],
+    userID : req.session["user_id"],
     users
   };
   // isUserLoggedIn?
@@ -312,7 +311,7 @@ app.post("/register", (req, res) => {
       password: hashedPassword
     };
     console.log('POST registration user Object =\n', users); //clg temp
-    res.cookie("user_id", generatedUserID);
+    req.session["user_id"] = generatedUserID;
     res.redirect("/urls");
   }
 });
@@ -320,7 +319,7 @@ app.post("/register", (req, res) => {
 // USER LOGIN
 app.get("/login", (req, res) => {
   const templateVars = {
-    userID : req.cookies["user_id"],
+    userID : req.session["user_id"],
     users
   };
   // isUserLoggedIn?
@@ -339,14 +338,14 @@ app.post("/login", (req, res) => {
     /* Validation check => correct password*/
     res.status(403).send('Bad Request: Status 403 : Forbidden : incorrect password');
   } else {
-    res.cookie("user_id", existingUser.id);
+    req.session["user_id"] = existingUser.id;
     res.redirect("/urls");
   }
 });
 
 // USER LOGOUT
 app.post("/logout", (req, res) => {
-  res.clearCookie("user_id");
+  req.session = null;
   res.redirect("/login");
 });
 
