@@ -297,10 +297,11 @@ app.post("/register", (req, res) => {
   } else {
     /* route logic */
     const generatedUserID = generateRandomString();
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
     users[`${generatedUserID}`] = {
       id : generatedUserID,
       email: req.body.email,
-      password: req.body.password
+      password: hashedPassword
     };
     console.log('POST registration user Object =\n', users); //clg temp
     res.cookie("user_id", generatedUserID);
