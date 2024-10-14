@@ -42,6 +42,8 @@ const testUrlDatabase = {
   },
 };
 
+describe("Helper Functions", () => {
+  
   describe("generateRandomString", () => {
     it("should generate a 6 digit id by default if argument is empty or =undefined", () => {
       const id = generateRandomString();
@@ -98,3 +100,4 @@ const testUrlDatabase = {
     });
   });
   
+});
