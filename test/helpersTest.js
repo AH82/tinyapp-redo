@@ -1,4 +1,4 @@
-const { assert } = require('chai');
+const { expect, assert } = require('chai');
 
 const {
   getUserByEmail,
