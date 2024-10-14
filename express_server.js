@@ -4,7 +4,9 @@ const {
 } = require("./databases.js");
 
 const {
-  generateRandomString
+  generateRandomString,
+  getUserByEmail,
+  urlsForUser
 } = require("./helper.js");
 
 const express = require("express");
@@ -27,44 +29,6 @@ app.use(cookieSession({
 
 
 
-
-/**
- * Get a user by their email, from the users object.
- * @param {string} email - string
- *
- * @param {object} [usersObject=users] - Users-list Object to be searched through. Defaults to users oject in this code.
-    * @param {object} usersObject.userID - indiviual user object with their id as the property-key
-      * @param {string} usersObject.userID.id - user's ID
-      * @param {string} usersObject.userID.email - user's email
-      * @param {string} usersObject.userID.password - users's password
- *
- * @returns {null|object[userID]}
- *  - returns null if not found, or,
- *  - returns individual user object if found.
- */
-const getUserByEmail = (email, usersObject = users) => {
-  for (let user in usersObject) {
-    if (usersObject[user]["email"] === email) return usersObject[user];
-  }
-  return null;
-};
-
-// MINI_TEST : for getUserByEmail() fn
-// console.log("TESTING ... getUserByEmail(...)\n");
-// console.log("getUserByEmail -> user2 = ", getUserByEmail("user2@example.com"));
-// console.log("getUserByEmail -> non-existing user = ", getUserByEmail("user3@example.com"));
-
-
-
-const urlsForUser = function(id, databaseObject = urlDatabase) {
-  let urlDatabaseForUser = {};
-  for (let shortURLID in databaseObject) {
-    if (databaseObject[shortURLID].userID === id) {
-      urlDatabaseForUser[shortURLID] = databaseObject[shortURLID];
-    }
-  }
-  return urlDatabaseForUser;
-};
 
 app.get("/", (req, res) => {
   res.send("hello!");
