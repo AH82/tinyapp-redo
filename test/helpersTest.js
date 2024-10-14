@@ -70,3 +70,14 @@ const testUrlDatabase = {
     });
   });
   
+  describe('getUserByEmail', function() {
+    it('should return a user with valid email', function() {
+      const user = getUserByEmail("user@example.com", testUsers);
+      const expectedUserID = "userRandomID";
+      assert(user.id === expectedUserID, `user = ${user}`);
+    });
+    it("should return null if user email does not exist", () => {
+      assert.isNull(getUserByEmail("user@absent.com", testUsers));
+    });
+  });
+  
