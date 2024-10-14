@@ -19,7 +19,9 @@ const generateRandomString = function(strLength = 6) {
 
   if (typeof(strLength) !== "number")
     throw new TypeError("Argument must be of type Number");
-
+  if (strLength <= 0)
+    throw new Error("Number argument can not be Equal to or less than zero");
+    
   let randomString = "";
 
   //alphanumeric possibilities
