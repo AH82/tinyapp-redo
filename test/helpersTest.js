@@ -1,10 +1,14 @@
 const { expect, assert } = require('chai');
 
+// TEST TARGETS:
+
 const {
   getUserByEmail,
   generateRandomString,
   urlsForUser
 } = require('../helper.js');
+
+// TEST DATA:
 
 const testUsers = {
   "userRandomID": {
@@ -41,6 +45,8 @@ const testUrlDatabase = {
     userID: "aJ48lW",
   },
 };
+
+// TEST CASES:
 
 describe("Helper Functions", () => {
   
