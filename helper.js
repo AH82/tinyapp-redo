@@ -36,20 +36,6 @@ const generateRandomString = function(strLength = 6) {
   return randomString;
 };
 
-// MINI_TEST : for generateRandomString() fn
-/* // HAPPY PATH TEST
-console.log(
-  "Test: random string is => ",
-  generateRandomString()
-); */
-/*
-// NEGATIVE-TEST :
-console.log(
-  "Test: random string is => ",
-  generateRandomString("true")
-); */
-
-
 /**
  * Get a user by their email, from the users object.
  * @param {string} email - string
@@ -70,12 +56,6 @@ const getUserByEmail = (email, usersObject = users) => {
   }
   return null;
 };
-
-// MINI_TEST : for getUserByEmail() fn
-// console.log("TESTING ... getUserByEmail(...)\n");
-// console.log("getUserByEmail -> user2 = ", getUserByEmail("user2@example.com"));
-// console.log("getUserByEmail -> non-existing user = ", getUserByEmail("user3@example.com"));
-
 
 /**
  * fetches urls associated with certain user.
