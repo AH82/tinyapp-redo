@@ -1,3 +1,7 @@
+const {
+  users,
+} = require("./databases.js");
+
 const express = require("express");
 const cookieSession = require("cookie-session");
 const bcrypt = require("bcryptjs");
@@ -53,23 +57,6 @@ console.log(
   generateRandomString("true")
 ); */
 
-const users = {
-  userRandomID: {
-    id: "userRandomID",
-    email: "user@example.com",
-    password: "purple-monkey-dinosaur",
-  },
-  user2RandomID: {
-    id: "user2RandomID",
-    email: "user2@example.com",
-    password: "dishwasher-funk",
-  },
-  aJ48lW: {
-    id: "aJ48lW",
-    email: "user@email.com",
-    password: "pass",
-  },
-};
 
 /**
  * Get a user by their email, from the users object.
