@@ -2,6 +2,7 @@
  * @file Hardcoded Databases for development and demo purposes.
  */
 
+const bcrypt = require("bcryptjs");
 /**
  * Database object containing the list of users
  * @typedef {object} UsersDatabaseObject
@@ -16,17 +17,17 @@ const users = {
   userRandomID: {
     id: "userRandomID",
     email: "user@example.com",
-    password: "purple-monkey-dinosaur",
+    password: bcrypt.hashSync("purple-monkey-dinosaur", 10),
   },
   user2RandomID: {
     id: "user2RandomID",
     email: "user2@example.com",
-    password: "dishwasher-funk",
+    password: bcrypt.hashSync("dishwasher-funk", 10),
   },
   aJ48lW: {
     id: "aJ48lW",
     email: "user@email.com",
-    password: "pass",
+    password: bcrypt.hashSync("pass", 10),
   },
 };
 
