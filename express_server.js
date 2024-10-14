@@ -1,5 +1,6 @@
 const {
   users,
+  urlDatabase
 } = require("./databases.js");
 
 const express = require("express");
@@ -84,25 +85,7 @@ const getUserByEmail = (email, usersObject = users) => {
 // console.log("getUserByEmail -> user2 = ", getUserByEmail("user2@example.com"));
 // console.log("getUserByEmail -> non-existing user = ", getUserByEmail("user3@example.com"));
 
-const urlDatabase = {
-  b2xVn2: {
-    longURL: "http://www.lighthouselabs.ca",
-    userID: "userRandomID",
-  },
-  "9sm5xK": {
-    longURL: "http://www.google.com",
-    userID: "user2RandomID",
-  },
-  b6UTxQ: {
-    longURL: "https://www.tsn.ca",
-    userID: "aJ48lW",
-  },
-  i3BoGr: {
-    longURL: "https://www.google.ca",
-    userID: "aJ48lW",
-  },
 
-};
 
 const urlsForUser = function(id, databaseObject = urlDatabase) {
   let urlDatabaseForUser = {};
