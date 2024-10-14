@@ -42,3 +42,31 @@ const testUrlDatabase = {
   },
 };
 
+  describe("generateRandomString", () => {
+    it("should generate a 6 digit id by default if argument is empty or =undefined", () => {
+      const id = generateRandomString();
+      assert(id.length === 6);
+    });
+    it("should throw an error if argument is not of type Number", () => {
+      expect(() => generateRandomString(true)).to.throw();
+      expect(() => generateRandomString("string")).to.throw();
+      expect(() => generateRandomString(null)).to.throw();
+      expect(() => generateRandomString({})).to.throw();
+    });
+    it("Should generate ID length according to argument's number", () => {
+      const id2 = generateRandomString(2);
+      const id4 = generateRandomString(4);
+      const id6 = generateRandomString(6);
+      const id9 = generateRandomString(9);
+      assert(id2.length === 2);
+      assert(id4.length === 4);
+      assert(id6.length === 6);
+      assert(id9.length === 9);
+    });
+    it("should throw an error if arg = 0 or negative", () => {
+      expect(() => generateRandomString(0)).to.throw();
+      expect(() => generateRandomString(-1)).to.throw();
+      
+    });
+  });
+  
