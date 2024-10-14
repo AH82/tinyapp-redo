@@ -81,3 +81,20 @@ const testUrlDatabase = {
     });
   });
   
+  describe("urlsForUser", () => {
+    const userUrls = urlsForUser("userRandomID", testUrlDatabase);
+    it("should return an object", () => {
+      expect(userUrls).to.be.an("object");
+      
+    });
+    it("should return an object with ALL URLs for a specific user", () => {
+      // const userUrls = urlsForUser("userRandomID", testUrlDatabase);
+      expect(userUrls).to.have.all.keys("b2xVn2", "b2xVn3");
+      expect(userUrls["b2xVn2"]).has.all.keys('longURL', 'userID');
+      expect(userUrls["b2xVn3"]).has.all.keys('longURL', 'userID');
+    });
+    it("should not return any other users' urls", () => {
+      expect(userUrls).not.to.have.any.keys("9sm5xK", "b6UTxQ", "i3BoGr");
+    });
+  });
+  
