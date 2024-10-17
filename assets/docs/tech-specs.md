@@ -26,9 +26,11 @@
 
 By default on `http://localhost:8080/` 
 
-| `GET /`  | Home |
+| **Route** | **Description**  |
 | --- | --- |
-| `GET /urls.json` | ( Demo Courtesy ) Lists all hardcoded demo URLs in database in JSON format |
+| `GET /`  | Home |
+| `GET /urls.json` | ( API Demo Courtesy ) Lists all hardcoded demo URLs in database in JSON format |
+| `GET /users.json` | ( API Demo Courtesy ) Lists all hardcoded demo users in database in JSON format  |
 | `GET /register` | Renders Register page and form. |
 | `POST /register` | Creates New user with encrypted password, set cookie, & redirect to `/urls`. |
 | `GET /login`  | Renders Login page and form. |
@@ -39,7 +41,7 @@ By default on `http://localhost:8080/`
 | `GET /urls/:id` | Renders selected URL page with an update form. |
 | `GET /u/:id` | Redirects selected URL to Target long URL. |
 | `POST /urls` | Creates new URL for logged in user. |
-| `POST /urls/:id` | Updates selected  URL’s target long URL. |
+| `POST /urls/:id/edit` | Updates selected  existing URL’s target long URL. |
 | `POST /urls/:id/delete` | Delete Selected URL. |
 ---
 
