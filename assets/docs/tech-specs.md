@@ -28,7 +28,7 @@ By default on `http://localhost:8080/`
 
 | **Route** | **Description**  |
 | --- | --- |
-| `GET /`  | Home |
+| `GET /`  | Home / redirects to URLs if logged in / redirects to login if not. |
 | `GET /urls.json` | ( API Demo Courtesy ) Lists all hardcoded demo URLs in database in JSON format |
 | `GET /users.json` | ( API Demo Courtesy ) Lists all hardcoded demo users in database in JSON format  |
 | `GET /register` | Renders Register page and form. |
