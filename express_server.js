@@ -31,7 +31,9 @@ app.use(cookieSession({
 
 
 app.get("/", (req, res) => {
-  res.send("hello!");
+  // res.send("hello!");
+  const userID = req.session["user_id"];
+  userID ? res.redirect("/urls") : res.redirect("/login");
 });
 
 app.get("/urls.json", (req, res) => {
