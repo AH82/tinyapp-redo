@@ -12,6 +12,15 @@
 
 ---
 
+## v1.0.0 
+- Major release
+- all Major requirements has been implemented.
+- `GET /` now redirects to login if user is not, urls if user is logged in.
+- Builds users API (`GET /users.json`), based on sample hardcoded users database
+
+[ `[ git tag link ]` ](https://github.com/AH82/tinyapp-redo/releases/tag/v1.0.0)
+
+
 ## v0.7.0
 - Branch-Merge/devFeature/unit-test
 - devFeature: all unit-test target= helper fn & 1 update-fix
