@@ -29,7 +29,6 @@ app.use(cookieSession({
 
 
 
-
 app.get("/", (req, res) => {
   // res.send("hello!");
   const userID = req.session["user_id"];
@@ -37,7 +36,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/urls.json", (req, res) => {
-  res.json(urlDatabase);
+  res.json(urlDatabase); // for demo purposes
+});
+
+app.get("/users.json", (req, res) => {
+  res.json(users); // for demo purposes
 });
 
 app.get("/hello", (req, res) => {
